@@ -1,31 +1,4 @@
-# Operating System Files
-
-*.DS_Store
-Thumbs.db
-
-# Build Files #
-
-bin
+.idea
 target
-build/
-.gradle
-
-# Eclipse Project Files #
-
-.classpath
-.project
-.settings
-.springBeans
-
-# IntelliJ IDEA Files #
-
 *.iml
-*.ipr
-*.iws
-*.idea
-
-# Test files
-
-accessingdataneo4j.db
-dependency-reduced-pom.xml
-README.html
+build
