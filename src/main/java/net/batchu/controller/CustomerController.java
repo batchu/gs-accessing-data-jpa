@@ -17,7 +17,7 @@ public class CustomerController {
     CustomerRepository repository;
 
     @ApiOperation(value = "Get Customers", notes = "Retreive all Customers", nickname = "Get Customers")
-    @GetMapping("/customer}")
+    @GetMapping("/customer")
     public ResponseEntity<?> getCustomers() {
 
         return ResponseEntity.ok(repository.findAll());

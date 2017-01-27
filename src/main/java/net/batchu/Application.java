@@ -13,11 +13,9 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @ComponentScan("net.batchu.controller")
-@EnableSwagger2
 public class Application {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
@@ -63,11 +61,12 @@ public class Application {
 
     @Bean
     public Docket api() {
-
         Docket docket = new Docket(DocumentationType.SWAGGER_2).groupName("myApi").
                 select()
-                .apis(RequestHandlerSelectors.basePackage("net.batchu.controller"))
+                .apis(RequestHandlerSelectors.any())
+//                .apis(RequestHandlerSelectors.basePackage("net.batchu.controller"))
                 .paths(PathSelectors.any()).build();
+
         return docket;
     }
 

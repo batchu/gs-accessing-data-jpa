@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package hello;
+package net.batchu.dao;
 
-import net.batchu.dao.CustomerRepository;
 import net.batchu.model.Customer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class CustomerRepositoryTests {
+
     @Autowired
     private TestEntityManager entityManager;
 
