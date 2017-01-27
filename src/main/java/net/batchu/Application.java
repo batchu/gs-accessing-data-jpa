@@ -15,7 +15,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 @SpringBootApplication
-@ComponentScan("net.batchu.controller")
+@ComponentScan("net.batchu")
 public class Application {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);

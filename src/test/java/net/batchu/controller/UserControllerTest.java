@@ -1,7 +1,7 @@
 package net.batchu.controller;
 
-import net.batchu.dao.UserRepository;
 import net.batchu.model.User;
+import net.batchu.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,12 +32,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserControllerTest {
 
     @Mock
-    UserRepository repository;
+    UserService userService;
 
     PodamFactory factory;
 
     @Autowired
     private MockMvc mockMvc;
+
     @InjectMocks
     private UserController userController;
 
@@ -56,7 +57,7 @@ public class UserControllerTest {
         users.add(factory.manufacturePojo(User.class));
         users.add(factory.manufacturePojo(User.class));
 
-        when(repository.findAll()).thenReturn(users);
+        when(userService.findAll()).thenReturn(users);
 
         this.mockMvc.perform(get("/user").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
