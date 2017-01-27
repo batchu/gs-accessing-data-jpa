@@ -1,6 +1,7 @@
 package net.batchu.controller;
 
 import net.batchu.model.User;
+import net.batchu.model.exception.NoMatchingUserException;
 import net.batchu.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.util.NestedServletException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -66,4 +68,26 @@ public class UserControllerTest {
 
     }
 
+    @Test
+    public void getUser() throws Exception, NoMatchingUserException {
+
+        Long id = 6L;
+        User user = factory.manufacturePojo(User.class);
+        when(userService.findById(id)).thenReturn(user);
+
+        this.mockMvc.perform(get("/user/" + id).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstName").value(equalTo(user.getFirstName())))
+                .andExpect(jsonPath("$.lastName").value(equalTo(user.getLastName())));
+
+    }
+
+    @Test(expected = NestedServletException.class)
+    public void getUser_throwsException_forInvalidUser() throws NoMatchingUserException, Exception {
+
+        Long id = 6L;
+        when(userService.findById(id)).thenThrow(new NoMatchingUserException("No Matching user found"));
+        this.mockMvc.perform(get("/user/" + id));
+
+    }
 }

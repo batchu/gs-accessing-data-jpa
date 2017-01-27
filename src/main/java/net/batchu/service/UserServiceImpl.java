@@ -2,6 +2,7 @@ package net.batchu.service;
 
 import net.batchu.dao.UserRepository;
 import net.batchu.model.User;
+import net.batchu.model.exception.NoMatchingUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,13 @@ public class UserServiceImpl implements UserService {
         });
 
         return users;
+    }
+
+    @Override
+    public User findById(Long id) throws NoMatchingUserException {
+        User user = repository.findById(id);
+        if (user == null)
+            throw new NoMatchingUserException("No user found for id" + id);
+        return user;
     }
 }

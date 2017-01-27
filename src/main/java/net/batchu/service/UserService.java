@@ -1,6 +1,7 @@
 package net.batchu.service;
 
 import net.batchu.model.User;
+import net.batchu.model.exception.NoMatchingUserException;
 
 import java.util.List;
 
@@ -10,4 +11,6 @@ import java.util.List;
 public interface UserService {
 
     List<User> findAll();
+
+    User findById(Long id) throws NoMatchingUserException;
 }

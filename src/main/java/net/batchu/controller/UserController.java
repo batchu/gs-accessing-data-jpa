@@ -10,10 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -35,6 +32,13 @@ public class UserController {
     public ResponseEntity<?> getUsers() {
 
         return ResponseEntity.ok(userService.findAll());
+    }
+
+    @ApiOperation(value = "Get User By ID", notes = "Retreive User by ID", nickname = "Get a User")
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getUser(@PathVariable Long id) throws NoMatchingUserException {
+
+        return ResponseEntity.ok(userService.findById(id));
     }
 
     @ExceptionHandler({NoMatchingUserException.class})

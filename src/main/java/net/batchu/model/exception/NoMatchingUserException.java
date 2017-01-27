@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Created by i1551 on 1/12/2017.
  */
-@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such Order")
+@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such User")
 public class NoMatchingUserException extends UserGenericException {
 
 
