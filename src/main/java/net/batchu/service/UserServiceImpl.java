@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     public User findById(Long id) throws NoMatchingUserException {
         User user = repository.findById(id);
         if (user == null)
-            throw new NoMatchingUserException("No user found for id" + id);
+            throw new NoMatchingUserException("No user found with id " + id);
         return user;
     }
 }
