@@ -1,7 +1,7 @@
 package net.batchu.controller;
 
-import net.batchu.dao.CustomerRepository;
-import net.batchu.model.Customer;
+import net.batchu.dao.UserRepository;
+import net.batchu.model.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,37 +29,39 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by i1551 on 1/26/2017.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class CustomerControllerTest {
+public class UserControllerTest {
 
     @Mock
-    CustomerRepository repository;
+    UserRepository repository;
+
     PodamFactory factory;
+
     @Autowired
     private MockMvc mockMvc;
     @InjectMocks
-    private CustomerController customerController;
+    private UserController userController;
 
     @Before
     public void setUp() throws Exception {
 
         MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(customerController).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
         factory = new PodamFactoryImpl();
     }
 
     @Test
     public void getCustomers() throws Exception {
 
-        List<Customer> customers = new ArrayList<Customer>();
-        customers.add(factory.manufacturePojo(Customer.class));
-        customers.add(factory.manufacturePojo(Customer.class));
+        List<User> users = new ArrayList<User>();
+        users.add(factory.manufacturePojo(User.class));
+        users.add(factory.manufacturePojo(User.class));
 
-        when(repository.findAll()).thenReturn(customers);
+        when(repository.findAll()).thenReturn(users);
 
-        this.mockMvc.perform(get("/customer").accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get("/user").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].firstName").value(equalTo(customers.get(0).getFirstName())))
-                .andExpect(jsonPath("$[0].lastName").value(equalTo(customers.get(0).getLastName())));
+                .andExpect(jsonPath("$[0].firstName").value(equalTo(users.get(0).getFirstName())))
+                .andExpect(jsonPath("$[0].lastName").value(equalTo(users.get(0).getLastName())));
 
     }
 

@@ -16,7 +16,7 @@
 
 package net.batchu.dao;
 
-import net.batchu.model.Customer;
+import net.batchu.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +30,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class CustomerRepositoryTests {
+public class UserRepositoryTests {
 
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
-    private CustomerRepository customers;
+    private UserRepository customers;
 
     @Test
     public void testFindByLastName() {
-        Customer customer = new Customer("first", "last");
-        entityManager.persist(customer);
+        User user = new User("first", "last");
+        entityManager.persist(user);
 
-        List<Customer> findByLastName = customers.findByLastName(customer.getLastName());
+        List<User> findByLastName = customers.findByLastName(user.getLastName());
 
-        assertThat(findByLastName).extracting(Customer::getLastName).containsOnly(customer.getLastName());
+        assertThat(findByLastName).extracting(User::getLastName).containsOnly(user.getLastName());
     }
 }
